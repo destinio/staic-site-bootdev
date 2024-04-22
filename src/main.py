@@ -2,7 +2,7 @@ import os
 import shutil
 
 from copy_files import copy_files
-from generate_page import generate_page
+from generate_page import generate_pages
 
 static_path = "./static"
 public_path = "./public"
@@ -16,11 +16,8 @@ def main():
             shutil.rmtree(public_path)
 
         copy_files(static_path, public_path)
-        generate_page(
-            os.path.join(content_path, "index.md"),
-            template_path,
-            os.path.join(public_path, "index.html"),
-        )
+
+        generate_pages(content_path, template_path, public_path)
 
 
 main()

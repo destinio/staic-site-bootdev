@@ -1,5 +1,18 @@
 import os
 from blocks import markdown_to_html_node
+from pathlib import Path
+
+
+def generate_pages(content_path, template_path, dest_path):
+    for file in os.listdir(content_path):
+        from_path = os.path.join(content_path, file)
+        des_path = os.path.join(dest_path, file)
+
+        if os.path.isfile(from_path):
+            des_path = Path(des_path).with_suffix(".html")
+            generate_page(from_path, template_path, des_path)
+        else:
+            generate_pages(from_path, template_path, des_path)
 
 
 def generate_page(from_path, template_path, dest_path):
